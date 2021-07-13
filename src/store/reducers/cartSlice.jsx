@@ -20,10 +20,17 @@ const cartSlice = createSlice({
           }
         });
         if (!isSame) {
+          action.payload = action.payload.map((item) => {
+            return { ...item, amount: 1 };
+          });
           state.cart = [...state.cart, ...action.payload];
         }
       } else {
-        console.log("Cart duoc tao");
+        action.payload = action.payload.map((item) => {
+          return { ...item, amount: 1 };
+        });
+        console.log(action.payload);
+
         state.cart = [...state.cart, ...action.payload];
       }
     },

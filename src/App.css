@@ -1039,12 +1039,12 @@ a {
   font-size: 16px;
 }
 
-.card_men-img-item {
+/* .card_men-img-item {
   max-width: 100%;
   width: 90px;
   height: 300px;
   object-fit: contain;
-}
+} */
 
 /*ACCOUNT PAGE*/
 body {
@@ -1165,6 +1165,7 @@ body {
 
 .product_profile-star {
   display: flex;
+  justify-content: center;
   margin: 12px 0;
 }
 

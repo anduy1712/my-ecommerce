@@ -5,10 +5,10 @@ import axios from "axios";
 export const getProducts = createAsyncThunk(
   "product/productFetch",
   async () => {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    response.data = response.data.map((item) => {
-      return { ...item, amount: 1 };
-    });
+    const response = await axios.get("http://localhost:3000/products");
+    // response.data = response.data.map((item) => {
+    //   return { ...item, amount: 1 };
+    // });
     return response.data;
   }
 );
@@ -17,16 +17,24 @@ export const getDetailProduct = createAsyncThunk(
   "product/productDetail",
   async (idUser) => {
     const response = await axios.get(
-      `https://fakestoreapi.com/products/${idUser}`
+      `http://localhost:3000/products/${idUser}`
     );
     return response.data;
   }
 );
 
-export const getAllCate = createAsyncThunk("product/getCate", async () => {
+export const getAllCate = createAsyncThunk("product/getCates", async () => {
   const response = await axios.get(
     "https://fakestoreapi.com/products/categories"
   );
+  return response.data;
+});
+
+export const getCate = createAsyncThunk("product/getCate", async (name) => {
+  const response = await axios.get(
+    `http://localhost:3000/products?category=${name}`
+  );
+  console.log(response);
   return response.data;
 });
 // fetchProduct();
@@ -61,6 +69,10 @@ const productSlice = createSlice({
     //Get Categories
     [getAllCate.fulfilled]: (state, action) => {
       state.categories = action.payload;
+    },
+    //Get Category
+    [getCate.fulfilled]: (state, action) => {
+      state.products = action.payload;
     },
   },
 });

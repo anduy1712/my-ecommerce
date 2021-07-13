@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { addUser, fetchUser } from "../store/reducers/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addUser,
+  authSelector,
+  fetchUser,
+  login,
+} from "../store/reducers/userSlice";
+import { Redirect, useHistory } from "react-router-dom";
 const Login = () => {
-  
+  const history = useHistory();
   const dispatch = useDispatch();
+  const auth = useSelector(authSelector);
   //Validate Sign up
   const validate = Yup.object({
     firstName: Yup.string()
@@ -28,18 +35,23 @@ const Login = () => {
     dispatch(addUser(values));
   };
   const handleSubmitSignIn = (values) => {
-    console.log(values);
+    dispatch(login(values));
   };
   //Effect
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
+  useEffect(() => {
+    if (auth) {
+      history.push("/");
+    }
+  }, [auth]);
   return (
     <div style={{ padding: 0, backGround: "white" }}>
-      <div class="row account__page" style={{ padding: "0 100px" }}>
-        <h3 class="col-md-12 account__page-title">MY ACCOUNT</h3>
-        <div class="col-md-6 account__page-login">
-          <div class="account__page-note">
+      <div className="row account__page" style={{ padding: "0 100px" }}>
+        <h3 className="col-md-12 account__page-title">MY ACCOUNT</h3>
+        <div className="col-md-6 account__page-login">
+          <div className="account__page-note">
             <p>RETURNING CUSTOMER</p>
             <span>I am a returning customer</span>
           </div>
@@ -50,10 +62,10 @@ const Login = () => {
           >
             {({ values, handleChange }) => (
               <Form>
-                <div class="form__group">
-                  <label for="">Email Address:</label>
+                <div className="form__group">
+                  <label>Email Address:</label>
                   <input
-                    class="form__group-input"
+                    className="form__group-input"
                     type="text"
                     name="email"
                     onChange={handleChange}
@@ -61,15 +73,15 @@ const Login = () => {
                     value={values.email}
                   />
                   <ErrorMessage
-                    class="invalid"
+                    className="invalid"
                     component="div"
                     name="email"
                   ></ErrorMessage>
                 </div>
-                <div class="form__group">
-                  <label for="">Password:</label>
+                <div className="form__group">
+                  <label>Password:</label>
                   <input
-                    class="form__group-input"
+                    className="form__group-input"
                     type="password"
                     placeholder="Password"
                     name="password"
@@ -77,15 +89,15 @@ const Login = () => {
                     value={values.password}
                   />
                   <ErrorMessage
-                    class="invalid"
+                    className="invalid"
                     component="div"
                     name="password"
                   ></ErrorMessage>
                 </div>
-                <button type="submit" class="btnn btn__watch">
+                <button type="submit" className="btnn btn__watch">
                   Login
                 </button>
-                <div class="form__link">
+                <div className="form__link">
                   <a href="...">Forgot your password? </a> or{" "}
                   <a href="...">Return to Store</a>
                 </div>
@@ -93,8 +105,8 @@ const Login = () => {
             )}
           </Formik>
         </div>
-        <div class="col-md-6 account__page-register">
-          <div class="account__page-note">
+        <div className="col-md-6 account__page-register">
+          <div className="account__page-note">
             <p>NEW CUSTOMER</p>
             <span
               style={{ display: "block", margin: "10px 0", fontWeight: 400 }}
@@ -118,10 +130,10 @@ const Login = () => {
           >
             {({ values, handleChange }) => (
               <Form>
-                <div class="form__group">
-                  <label for="">First Name:</label>
+                <div className="form__group">
+                  <label>First Name:</label>
                   <input
-                    class="form__group-input"
+                    className="form__group-input"
                     type="text"
                     placeholder="First Name"
                     onChange={handleChange}
@@ -129,15 +141,15 @@ const Login = () => {
                     value={values.firstName}
                   />
                   <ErrorMessage
-                    class="invalid"
+                    className="invalid"
                     component="div"
                     name="firstName"
                   ></ErrorMessage>
                 </div>
-                <div class="form__group">
-                  <label for="">Email:</label>
+                <div className="form__group">
+                  <label>Email:</label>
                   <input
-                    class="form__group-input"
+                    className="form__group-input"
                     placeholder="Email address"
                     name="email"
                     onChange={handleChange}
@@ -145,15 +157,15 @@ const Login = () => {
                     value={values.email}
                   />
                   <ErrorMessage
-                    class="invalid"
+                    className="invalid"
                     component="div"
                     name="email"
                   ></ErrorMessage>
                 </div>
-                <div class="form__group">
-                  <label for="">Password:</label>
+                <div className="form__group">
+                  <label>Password:</label>
                   <input
-                    class="form__group-input"
+                    className="form__group-input"
                     placeholder="Password "
                     onChange={handleChange}
                     name="password"
@@ -161,12 +173,12 @@ const Login = () => {
                     value={values.password}
                   />
                   <ErrorMessage
-                    class="invalid"
+                    className="invalid"
                     component="div"
                     name="password"
                   ></ErrorMessage>
                 </div>
-                <button type="submit" class="btnn btn__watch">
+                <button type="submit" className="btnn btn__watch">
                   Create an account
                 </button>
               </Form>

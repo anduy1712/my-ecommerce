@@ -19,7 +19,8 @@ function App() {
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/products" component={Men} />
+            <Route exact path="/products" component={Men} />
+            <Route path="/products/:nameCate" component={Men} />
             <Route path="/product/:idUser" component={Detail} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
@@ -28,10 +29,6 @@ function App() {
           <Footer />
         </Router>
       </Provider>
-
-      {/* <Provider >
-        <ListCard/>
-      </Provider> */}
     </div>
   );
 }

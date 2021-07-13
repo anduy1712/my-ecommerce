@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
-import { getProducts, productsSelector } from "../store/reducers/productSlice";
+import {
+  getCate,
+  getProducts,
+  productsSelector,
+} from "../store/reducers/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 const Men = () => {
+  const { nameCate } = useParams();
   //Reducer
   const products = useSelector(productsSelector);
   const dispatch = useDispatch();
@@ -16,15 +22,21 @@ const Men = () => {
         name={product.title}
         price={product.price}
         img={product.image}
+        category={product.category}
         amount={1}
       />
     );
   });
   //Effect
   useEffect(() => {
-    console.log("men loading...");
     setLoading(true);
-    dispatch(getProducts());
+    if (nameCate) {
+      dispatch(getCate(nameCate));
+      console.log("get cate");
+    } else {
+      dispatch(getProducts());
+      console.log("get products");
+    }
     setLoading(false);
   }, [dispatch]);
   if (loading) {

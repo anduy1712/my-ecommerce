@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { productsSelector } from "../store/reducers/productSlice";
 import { Link } from "react-router-dom";
-const Product = ({ id, name, price, img }) => {
+const Product = ({ id, name, price, img, category }) => {
   const products = useSelector(productsSelector);
   const dispatch = useDispatch();
   //function
@@ -34,7 +34,7 @@ const Product = ({ id, name, price, img }) => {
           </p>
         </div>
         <div className="card_men-profile">
-          <p className="card_men-product">BACKZERI</p>
+          <p className="card_men-product">{category}</p>
           <h3 className="card_men-producttitle">{name}</h3>
           <div className="card_men-star product_profile-star">
             <i className="product_icon fas fa-star"></i>

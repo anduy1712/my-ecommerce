@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 //GET USER
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
-  const response = await axios.get("https://fakestoreapi.com/users");
+  const response = await axios.get("http://localhost:3000/users");
   return response.data;
 });
 //ADD USER
-export const addUser = createAsyncThunk("user/addUser", async (user) => {
+export const addUser = createAsyncThunk("users/addUser", async (user) => {
   const { firstName, email, password } = user;
   const obj = {
     id: 21,
@@ -38,15 +39,30 @@ export const addUser = createAsyncThunk("user/addUser", async (user) => {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: [],
+    users: [],
+    auth: false,
   },
-  reducers: [],
+  reducers: {
+    login: {
+      reducer: (state, action) => {
+        // console.log(typeof action.payload.email, "reducer");
+        let { email, password } = action.payload;
+        state.users.forEach((user) => {
+          if (user.email === email && user.password === password) {
+            localStorage.setItem("user", JSON.stringify(user));
+            state.auth = true;
+            console.log("ok login");
+          }
+        });
+      },
+    },
+  },
   extraReducers: {
     [fetchUser.pending]: (state, action) => {
       console.log("loading data");
     },
     [fetchUser.fulfilled]: (state, action) => {
-      state.user = action.payload;
+      state.users = action.payload;
     },
     [fetchUser.rejected]: (state, action) => {
       console.log("error data");
@@ -56,7 +72,7 @@ const userSlice = createSlice({
       console.log("Posting data");
     },
     [addUser.fulfilled]: (state, action) => {
-      state.user = [...state.user, action.payload];
+      state.users = [...state.user, action.payload];
       console.log(state.user, "test");
     },
     [addUser.rejected]: (state, action) => {
@@ -69,6 +85,9 @@ const userSlice = createSlice({
 const userReducer = userSlice.reducer;
 
 //Selector
-export const userSelector = (state) => state.userReducer.user;
+export const userSelector = (state) => state.userReducer.users;
+export const authSelector = (state) => state.userReducer.auth;
 
+//export action
+export const { login } = userSlice.actions;
 export default userReducer;

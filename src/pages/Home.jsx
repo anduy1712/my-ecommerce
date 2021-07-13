@@ -6,7 +6,7 @@ const Home = () => {
   //Reducer
   const dispatch = useDispatch();
   const cate = useSelector(cateSelector);
-  
+
   useEffect(() => {
     dispatch(getAllCate());
   }, []);
@@ -119,9 +119,7 @@ const Home = () => {
         </div>
         <div className="col-md-8">
           <div className="row">
-            {cate.forEach((item) => {
-              
-            })}
+            {cate.forEach((item) => {})}
             <div className="col-md-3">
               <div className="boxpopular_watch">
                 <a>
@@ -131,8 +129,10 @@ const Home = () => {
                   />
                   <h3 className="boxpopular_watch-heading">BLACKZERI</h3>
                   <p className="boxpopular_watch-content">8 product</p>
-                  <button className="btn-popular">Shop now</button>
-                  <Link to=""></Link>
+                  {/* <button className="btn-popular">Shop now</button> */}
+                  <Link to="/products/Burberry" className="btn-popular">
+                    Shop now
+                  </Link>
                 </a>
               </div>
             </div>
@@ -145,7 +145,9 @@ const Home = () => {
                   />
                   <h3 className="boxpopular_watch-heading">COSMOPOLIS</h3>
                   <p className="boxpopular_watch-content">8 product</p>
-                  <button className="btn-popular">Shop now</button>
+                  <Link to="/products/Cosmopolis" className="btn-popular">
+                    Shop now
+                  </Link>
                 </a>
               </div>
             </div>
@@ -158,7 +160,9 @@ const Home = () => {
                   />
                   <h3 className="boxpopular_watch-heading">MILANCELOS</h3>
                   <p className="boxpopular_watch-content">8 product</p>
-                  <button className="btn-popular">Shop now</button>
+                  <Link to="/products/Milancelos" className="btn-popular">
+                    Shop now
+                  </Link>
                 </a>
               </div>
             </div>

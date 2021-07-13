@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,16 +9,45 @@ import {
 } from "../store/reducers/cartSlice";
 
 const Header = () => {
-  //GET QUANTITY
+  const [user, setUser] = useState({
+    isSignIn: false,
+    fullName: "",
+  });
+  // let isSignIn = false;
+  // let fullName = " ";
+
+  //GET QUANTITY, GET CART
   const quantity = useSelector(cartquantitySelector);
-  //GET CART
   const cart = useSelector(cartSelector);
   //DISPATCH
   const dispatch = useDispatch();
+  //Function
+  const logOut = () => {
+    localStorage.removeItem("user");
+  };
   //USE EFFECT
   useEffect(() => {
     dispatch(amount());
   }, [cart]);
+  // useEffect(() => {
+
+  // }, [user]);
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user !== null) {
+      const { name } = JSON.parse(user);
+      const newUser = {
+        isSignIn: true,
+        fullName: name.firstname + " " + name.lastname,
+      };
+      setUser(newUser);
+    } else {
+      setUser({
+        isSignIn: false,
+        fullName: "",
+      });
+    }
+  }, [user]);
   return (
     <header>
       <nav
@@ -62,12 +91,15 @@ const Header = () => {
             </li>
           </ul>
           <div className="navbar__right">
-            {/* <div className="navbar__right-account">
-            <span className="navbar_acc">{{isSignedIn ? email : 'ACCOUNT'}} </span>
-            <i className="navbar__right-item far fa-user"></i>
-            <span (click)="logOut()" className="navbar_acc">{{isSignedIn ? 'Logout' : ''}} </span>
-  
-          </div> */}
+            <div className="navbar__right-account">
+              <span className="navbar_acc">
+                {user.isSignIn ? user.fullName : "ACCOUNT"}{" "}
+              </span>
+              <i className="navbar__right-item far fa-user"></i>
+              <span onClick={logOut} className="navbar_acc">
+                {user.isSignIn ? "Logout" : ""}
+              </span>
+            </div>
             <div className="shoppingCart">
               <Link to="/cart">
                 <i className="navbar__right-item fas fa-shopping-cart"></i>
