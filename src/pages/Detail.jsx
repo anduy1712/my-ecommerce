@@ -20,7 +20,7 @@ const Detail = () => {
   //Effect
   useEffect(() => {
     dispatch(getDetailProduct(idUser));
-  }, []);
+  }, [dispatch, idUser]);
   return (
     <div className=" container-fluid">
       <div className="product row">

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 //GET USER
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
@@ -59,9 +58,9 @@ const userSlice = createSlice({
     logout: {
       reducer: (state, action) => {
         state.auth = false;
-        localStorage.removeItem('user');
-      }
-    }
+        localStorage.removeItem("user");
+      },
+    },
   },
   extraReducers: {
     [fetchUser.pending]: (state, action) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ const Header = () => {
   //USE EFFECT
   useEffect(() => {
     dispatch(amount());
-  }, [cart]);
+  }, [cart, dispatch]);
   // useEffect(() => {
 
   // }, [user]);

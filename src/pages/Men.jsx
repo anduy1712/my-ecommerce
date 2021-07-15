@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
+
 import {
   getCate,
   getProducts,
@@ -7,6 +8,8 @@ import {
 } from "../store/reducers/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Men = () => {
   const { nameCate } = useParams();
   //Reducer
@@ -38,7 +41,7 @@ const Men = () => {
       console.log("get products");
     }
     setLoading(false);
-  }, [dispatch]);
+  }, [dispatch, nameCate]);
   if (loading) {
     return (
       <div>
@@ -101,6 +104,7 @@ const Men = () => {
           </div>
         </div>
         <div className="row_contain row">{items}</div>
+        <ToastContainer />
       </div>
     );
   }

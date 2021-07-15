@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllCate());
-  }, []);
+  }, [dispatch]);
   return (
     <div
       style={{ padding: 0, background: "white" }}
@@ -122,48 +122,42 @@ const Home = () => {
             {cate.forEach((item) => {})}
             <div className="col-md-3">
               <div className="boxpopular_watch">
-                <a>
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-1-compressor_large.jpg?v=1569935516"
-                    alt=""
-                  />
-                  <h3 className="boxpopular_watch-heading">BLACKZERI</h3>
-                  <p className="boxpopular_watch-content">8 product</p>
-                  {/* <button className="btn-popular">Shop now</button> */}
-                  <Link to="/products/Burberry" className="btn-popular">
-                    Shop now
-                  </Link>
-                </a>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-1-compressor_large.jpg?v=1569935516"
+                  alt=""
+                />
+                <h3 className="boxpopular_watch-heading">BLACKZERI</h3>
+                <p className="boxpopular_watch-content">8 product</p>
+                {/* <button className="btn-popular">Shop now</button> */}
+                <Link to="/products/Burberry" className="btn-popular">
+                  Shop now
+                </Link>
               </div>
             </div>
             <div className="col-md-3">
               <div className="boxpopular_watch">
-                <a>
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-3-compressor_large.jpg?v=1569935478"
-                    alt=""
-                  />
-                  <h3 className="boxpopular_watch-heading">COSMOPOLIS</h3>
-                  <p className="boxpopular_watch-content">8 product</p>
-                  <Link to="/products/Cosmopolis" className="btn-popular">
-                    Shop now
-                  </Link>
-                </a>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-3-compressor_large.jpg?v=1569935478"
+                  alt=""
+                />
+                <h3 className="boxpopular_watch-heading">COSMOPOLIS</h3>
+                <p className="boxpopular_watch-content">8 product</p>
+                <Link to="/products/Cosmopolis" className="btn-popular">
+                  Shop now
+                </Link>
               </div>
             </div>
             <div className="col-md-3">
               <div className="boxpopular_watch">
-                <a>
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-2-compressor_large.jpg?v=1569935497"
-                    alt=""
-                  />
-                  <h3 className="boxpopular_watch-heading">MILANCELOS</h3>
-                  <p className="boxpopular_watch-content">8 product</p>
-                  <Link to="/products/Milancelos" className="btn-popular">
-                    Shop now
-                  </Link>
-                </a>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0264/5000/1980/collections/image-collection-2-compressor_large.jpg?v=1569935497"
+                  alt=""
+                />
+                <h3 className="boxpopular_watch-heading">MILANCELOS</h3>
+                <p className="boxpopular_watch-content">8 product</p>
+                <Link to="/products/Milancelos" className="btn-popular">
+                  Shop now
+                </Link>
               </div>
             </div>
             <div className="col-md-3">
@@ -251,10 +245,9 @@ const Home = () => {
           <div className="card_home">
             <div className="card_men-images">
               <img
-                className="card_home-img-item"
+                className="card_home-img-item img-men"
                 src="https://cdn.shopify.com/s/files/1/0264/5000/1980/products/02_300x.jpg?v=1569989512"
                 alt=""
-                className="img-men"
               />
               <p className="card_men-sold">Sold Out</p>
               <div className="card_men-listicon">
@@ -284,10 +277,9 @@ const Home = () => {
           <div className="card_home">
             <div className="card_men-images">
               <img
-                className="card_home-img-item"
+                className="card_home-img-item img-men"
                 src="https://cdn.shopify.com/s/files/1/0264/5000/1980/products/02_300x.jpg?v=1569989512"
                 alt=""
-                className="img-men"
               />
               <p className="card_men-sold">Sold Out</p>
               <div className="card_men-listicon">
@@ -317,10 +309,9 @@ const Home = () => {
           <div className="card_home">
             <div className="card_men-images">
               <img
-                className="card_home-img-item"
+                className="card_home-img-item img-men"
                 src="https://cdn.shopify.com/s/files/1/0264/5000/1980/products/02_300x.jpg?v=1569989512"
                 alt=""
-                className="img-men"
               />
               <p className="card_men-sold">Sold Out</p>
               <div className="card_men-listicon">
@@ -350,10 +341,9 @@ const Home = () => {
           <div className="card_home">
             <div className="card_men-images">
               <img
-                className="card_home-img-item"
+                className="card_home-img-item img-men"
                 src="https://cdn.shopify.com/s/files/1/0264/5000/1980/products/02_300x.jpg?v=1569989512"
                 alt=""
-                className="img-men"
               />
               <p className="card_men-sold">Sold Out</p>
               <div className="card_men-listicon">

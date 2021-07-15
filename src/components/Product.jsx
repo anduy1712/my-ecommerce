@@ -4,23 +4,43 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { productsSelector } from "../store/reducers/productSlice";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Product = ({ id, name, price, img, category }) => {
   const products = useSelector(productsSelector);
   const dispatch = useDispatch();
   const history = useHistory();
+  //Toast
+
   //function
   const addtoCart = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user !== null) {
-      alert("product added to cart");
+      toast.success("Product added to cart", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       const product = products.filter((item) => {
         return item.id === id;
       });
       dispatch(addCart(product));
       dispatch(amount());
     } else {
-      alert("Please login to buy product");
-      history.push("/login");
+      toast.error("Please login to buy", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // history.push("/login");
     }
   };
   return (

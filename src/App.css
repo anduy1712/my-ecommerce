@@ -1328,3 +1328,11 @@ body {
   font-size: 12px;
   line-height: 16px;
 }
+
+.Toastify__toast-container--top-right {
+  /* margin-top: 50px; */
+}
+
+.Toastify__toast-body {
+  font-size: 1.4rem;
+}

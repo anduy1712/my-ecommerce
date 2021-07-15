@@ -22,7 +22,7 @@ const Cart = () => {
   const totalSelector = useSelector(carttotalSelector);
   useEffect(() => {
     dispatch(total());
-  }, [cart]);
+  }, [cart, dispatch]);
   return (
     <div style={{ padding: 20 + "px" }} className="row">
       <div className="col-md-9">
@@ -69,14 +69,14 @@ const Cart = () => {
                 type="text"
                 name="id_user"
                 readOnly={true}
-                value={user.id}
+                defaultValue={user.id}
                 placeholder="email"
               />
               <input
                 className="input__checkout"
                 type="text"
                 name="address"
-                value={user.address}
+                defaultValue={user.address}
                 placeholder="Please enter your address"
                 required
               />

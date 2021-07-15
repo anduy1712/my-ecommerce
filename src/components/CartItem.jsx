@@ -36,7 +36,7 @@ const CartItem = ({ id, name, img, price, amount }) => {
       </td>
       <td>Total: ${totalItem.toFixed()}</td>
       <td>
-        <a onClick={() => removeCart(id)} className="btn btn-danger">
+        <a href onClick={() => removeCart(id)} className="btn btn-danger">
           Remove
         </a>
       </td>

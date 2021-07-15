@@ -8,7 +8,7 @@ import {
   fetchUser,
   login,
 } from "../store/reducers/userSlice";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -45,12 +45,12 @@ const Login = () => {
     } else {
       dispatch(fetchUser());
     }
-  }, []);
+  }, [dispatch, history]);
   useEffect(() => {
     if (auth) {
       history.push("/");
     }
-  }, [auth]);
+  }, [auth, history]);
   return (
     <div style={{ padding: 0, backGround: "white" }}>
       <div className="row account__page" style={{ padding: "0 100px" }}>
