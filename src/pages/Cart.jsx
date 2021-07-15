@@ -5,6 +5,7 @@ import { cartSelector } from "../store/reducers/cartSlice";
 import { carttotalSelector, total } from "../store/reducers/cartSlice";
 const Cart = () => {
   const cart = useSelector(cartSelector);
+  const user = JSON.parse(localStorage.getItem("user"));
   const item = cart.map((item) => {
     return (
       <CartItem
@@ -68,18 +69,20 @@ const Cart = () => {
                 type="text"
                 name="id_user"
                 readOnly={true}
+                value={user.id}
                 placeholder="email"
               />
               <input
                 className="input__checkout"
                 type="text"
                 name="address"
+                value={user.address}
                 placeholder="Please enter your address"
                 required
               />
             </div>
             <div className="btn__group">
-              <input className="btn__duyan" defaultValue="Register" />
+              <input className="btn__duyan" defaultValue="Register" disabled />
               <input type="submit" value="Checkout" className="btn__duyan" />
             </div>
           </div>

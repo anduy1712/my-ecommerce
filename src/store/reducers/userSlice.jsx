@@ -56,6 +56,12 @@ const userSlice = createSlice({
         });
       },
     },
+    logout: {
+      reducer: (state, action) => {
+        state.auth = false;
+        localStorage.removeItem('user');
+      }
+    }
   },
   extraReducers: {
     [fetchUser.pending]: (state, action) => {
@@ -89,5 +95,5 @@ export const userSelector = (state) => state.userReducer.users;
 export const authSelector = (state) => state.userReducer.auth;
 
 //export action
-export const { login } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userReducer;

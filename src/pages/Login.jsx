@@ -39,7 +39,12 @@ const Login = () => {
   };
   //Effect
   useEffect(() => {
-    dispatch(fetchUser());
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user !== null) {
+      history.push("/");
+    } else {
+      dispatch(fetchUser());
+    }
   }, []);
   useEffect(() => {
     if (auth) {

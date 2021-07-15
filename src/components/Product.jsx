@@ -3,18 +3,25 @@ import { addCart, amount } from "../store/reducers/cartSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { productsSelector } from "../store/reducers/productSlice";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const Product = ({ id, name, price, img, category }) => {
   const products = useSelector(productsSelector);
   const dispatch = useDispatch();
+  const history = useHistory();
   //function
   const addtoCart = (id) => {
-    alert("product added to cart");
-    const product = products.filter((item) => {
-      return item.id === id;
-    });
-    dispatch(addCart(product));
-    dispatch(amount());
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user !== null) {
+      alert("product added to cart");
+      const product = products.filter((item) => {
+        return item.id === id;
+      });
+      dispatch(addCart(product));
+      dispatch(amount());
+    } else {
+      alert("Please login to buy product");
+      history.push("/login");
+    }
   };
   return (
     <div className="col-men col-md-3 col-sm-6">

@@ -7,6 +7,7 @@ import {
   cartquantitySelector,
   cartSelector,
 } from "../store/reducers/cartSlice";
+import { authSelector, logout } from "../store/reducers/userSlice";
 
 const Header = () => {
   const [user, setUser] = useState({
@@ -18,12 +19,14 @@ const Header = () => {
 
   //GET QUANTITY, GET CART
   const quantity = useSelector(cartquantitySelector);
+  const auth = useSelector(authSelector);
+
   const cart = useSelector(cartSelector);
   //DISPATCH
   const dispatch = useDispatch();
   //Function
   const logOut = () => {
-    localStorage.removeItem("user");
+    dispatch(logout());
   };
   //USE EFFECT
   useEffect(() => {
@@ -33,21 +36,24 @@ const Header = () => {
 
   // }, [user]);
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user !== null) {
-      const { name } = JSON.parse(user);
+    const userr = localStorage.getItem("user");
+    if (userr !== null) {
+      console.log("get user");
+
+      const { name } = JSON.parse(userr);
       const newUser = {
         isSignIn: true,
         fullName: name.firstname + " " + name.lastname,
       };
       setUser(newUser);
     } else {
+      console.log("can't get user");
       setUser({
         isSignIn: false,
         fullName: "",
       });
     }
-  }, [user]);
+  }, [auth]);
   return (
     <header>
       <nav

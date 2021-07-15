@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import ReactImageMagnify from "react-image-magnify";
 import {
   getDetailProduct,
   productSelector,
@@ -26,13 +27,20 @@ const Detail = () => {
         <div className="product_item custom col-md-6">
           <div className="product_img">
             <div className="easyzoom">
-              <a href="images/zoom.jpg">
-                <img
-                  style={{ margin: "0 auto", width: 200 + "px" }}
-                  src={image}
-                  alt="product"
-                />
-              </a>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Wristwatch by Ted Baker London",
+                    isFluidWidth: true,
+                    src: image,
+                  },
+                  largeImage: {
+                    src: image,
+                    width: 1200,
+                    height: 1800,
+                  },
+                }}
+              />
             </div>
           </div>
           <div className="product_note">

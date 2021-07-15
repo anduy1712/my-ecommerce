@@ -29,8 +29,6 @@ const cartSlice = createSlice({
         action.payload = action.payload.map((item) => {
           return { ...item, amount: 1 };
         });
-        console.log(action.payload);
-
         state.cart = [...state.cart, ...action.payload];
       }
     },
