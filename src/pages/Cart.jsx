@@ -4,7 +4,9 @@ import CartItem from "../components/CartItem";
 import { cartSelector } from "../store/reducers/cartSlice";
 import { carttotalSelector, total } from "../store/reducers/cartSlice";
 const Cart = () => {
+  //reducer
   const cart = useSelector(cartSelector);
+  //Get user
   const user = JSON.parse(localStorage.getItem("user"));
   const item = cart.map((item) => {
     return (
@@ -20,6 +22,7 @@ const Cart = () => {
   });
   const dispatch = useDispatch();
   const totalSelector = useSelector(carttotalSelector);
+  //Effect
   useEffect(() => {
     dispatch(total());
   }, [cart, dispatch]);

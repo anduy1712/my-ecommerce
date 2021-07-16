@@ -10,28 +10,19 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 export const addUser = createAsyncThunk("users/addUser", async (user) => {
   const { firstName, email, password } = user;
   const obj = {
-    id: 21,
     email,
     username: "johnd",
     password,
+    author: 2,
     name: {
       firstname: firstName,
       lastname: "Doe",
     },
-    address: {
-      city: "kilcoole",
-      street: "7835 new road",
-      number: 3,
-      zipcode: "12926-3874",
-      geolocation: {
-        lat: "-37.3159",
-        long: "81.1496",
-      },
-    },
+    address: "528 Dien Bien Phu street, distrist 10, HCM",
     phone: "1-570-236-7033",
   };
   console.log(obj);
-  await axios.post("https://jsonplaceholder.typicode.com/todos", obj);
+  await axios.post("http://localhost:3000/users", obj);
   return obj;
 });
 
@@ -77,8 +68,7 @@ const userSlice = createSlice({
       console.log("Posting data");
     },
     [addUser.fulfilled]: (state, action) => {
-      state.users = [...state.user, action.payload];
-      console.log(state.user, "test");
+      state.users = [...state.users, action.payload];
     },
     [addUser.rejected]: (state, action) => {
       console.log("error data");

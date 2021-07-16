@@ -14,9 +14,6 @@ const Header = () => {
     isSignIn: false,
     fullName: "",
   });
-  // let isSignIn = false;
-  // let fullName = " ";
-
   //GET QUANTITY, GET CART
   const quantity = useSelector(cartquantitySelector);
   const auth = useSelector(authSelector);
@@ -32,9 +29,6 @@ const Header = () => {
   useEffect(() => {
     dispatch(amount());
   }, [cart, dispatch]);
-  // useEffect(() => {
-
-  // }, [user]);
   useEffect(() => {
     const userr = localStorage.getItem("user");
     if (userr !== null) {

@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+
 import {
   addUser,
   authSelector,
@@ -13,6 +15,12 @@ const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const auth = useSelector(authSelector);
+  //initialValue
+  const [initSignup, setInitSignUp] = useState({
+    firstName: "",
+    email: "",
+    password: "",
+  });
   //Validate Sign up
   const validate = Yup.object({
     firstName: Yup.string()
@@ -33,6 +41,20 @@ const Login = () => {
   //Function
   const handleSubmitSignUp = (values) => {
     dispatch(addUser(values));
+    setInitSignUp({
+      firstName: "",
+      email: "",
+      password: "",
+    });
+    toast.success("Account is created", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
   const handleSubmitSignIn = (values) => {
     dispatch(login(values));
@@ -125,11 +147,7 @@ const Login = () => {
             </span>
           </div>
           <Formik
-            initialValues={{
-              firstName: "",
-              email: "",
-              password: "",
-            }}
+            initialValues={initSignup}
             validationSchema={validate}
             onSubmit={handleSubmitSignUp}
           >
@@ -189,6 +207,7 @@ const Login = () => {
               </Form>
             )}
           </Formik>
+          <ToastContainer />
         </div>
       </div>
     </div>
