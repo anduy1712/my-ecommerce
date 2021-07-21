@@ -132,14 +132,37 @@
       "address": "528 Dien Bien Phu street, distrist 10, HCM",
       "phone": "1-570-236-7033",
       "id": 3
+    },
+    {
+      "email": "admin@gmail.com",
+      "username": "johnd",
+      "password": "dsaddasda",
+      "author": 2,
+      "name": {
+        "firstname": "dasda",
+        "lastname": "Doe"
+      },
+      "address": "528 Dien Bien Phu street, distrist 10, HCM",
+      "phone": "1-570-236-7033",
+      "id": 4
+    },
+    {
+      "email": "sshavy109@gmail.com",
+      "username": "johnd",
+      "password": "123456",
+      "author": 2,
+      "name": {
+        "firstname": "Duy An",
+        "lastname": "Doe"
+      },
+      "address": "528 Dien Bien Phu street, distrist 10, HCM",
+      "phone": "1-570-236-7033",
+      "id": 5
     }
   ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
+  "customers": [
+    
+    
   ],
   "comments": [
     {

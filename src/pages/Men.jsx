@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { cartSelector, getCart } from "../store/reducers/cartSlice";
 const Men = () => {
   const { nameCate } = useParams();
   //Reducer
   const products = useSelector(productsSelector);
+
   const dispatch = useDispatch();
   //State
   const [loading, setLoading] = useState(false);
@@ -31,6 +33,7 @@ const Men = () => {
     );
   });
   //Effect
+  
   useEffect(() => {
     setLoading(true);
     if (nameCate) {
@@ -40,6 +43,7 @@ const Men = () => {
       dispatch(getProducts());
       console.log("get products");
     }
+
     setLoading(false);
   }, [dispatch, nameCate]);
   if (loading) {

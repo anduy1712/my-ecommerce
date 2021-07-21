@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { cartSelector } from "../store/reducers/cartSlice";
 import { carttotalSelector, total } from "../store/reducers/cartSlice";
+import { addCustomer } from "../store/reducers/customers";
 const Cart = () => {
+  const history = useHistory();
   //reducer
-  const cart = useSelector(cartSelector);
+  let cart = useSelector(cartSelector);
+  const totalSelector = useSelector(carttotalSelector);
+
+  const dispatch = useDispatch();
+
   //Get user
   const user = JSON.parse(localStorage.getItem("user"));
   const item = cart.map((item) => {
@@ -20,8 +27,37 @@ const Cart = () => {
       />
     );
   });
-  const dispatch = useDispatch();
-  const totalSelector = useSelector(carttotalSelector);
+  //Submit Cart
+  const handleSubmit = () => {
+    // Create Day Time
+    var today = new Date();
+    var date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    var time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + " " + time;
+    //Create obj
+    const customer = {
+      userId: user.id,
+      date: dateTime,
+      product: [],
+    };
+    cart.forEach((item) => {
+      customer.product = [
+        ...customer.product,
+        {
+          productId: item.id,
+          quantity: item.amount,
+        },
+      ];
+    });
+    dispatch(addCustomer(customer));
+    history.push("/");
+  };
   //Effect
   useEffect(() => {
     dispatch(total());
@@ -86,7 +122,11 @@ const Cart = () => {
             </div>
             <div className="btn__group">
               <input className="btn__duyan" defaultValue="Register" disabled />
-              <input type="submit" value="Checkout" className="btn__duyan" />
+              <input
+                onClick={handleSubmit}
+                value="Checkout"
+                className="btn__duyan"
+              />
             </div>
           </div>
         </form>

@@ -1,5 +1,12 @@
-import React from "react";
-import { addCart, amount } from "../store/reducers/cartSlice";
+import React, { useEffect } from "react";
+import {
+  addCart,
+  amount,
+  cartSelector,
+  editCart,
+  getCart,
+  getItemCart,
+} from "../store/reducers/cartSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { productsSelector } from "../store/reducers/productSlice";
@@ -8,16 +15,23 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Product = ({ id, name, price, img, category }) => {
   const products = useSelector(productsSelector);
+
+  let cart = useSelector(cartSelector);
   const dispatch = useDispatch();
+
   const history = useHistory();
   //Toast
 
   //function
+
   const addtoCart = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
+
+    //CHECK USER
     if (user !== null) {
+      console.log(cart);
       toast.success("Product added to cart", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -25,9 +39,34 @@ const Product = ({ id, name, price, img, category }) => {
         draggable: true,
         progress: undefined,
       });
-      const product = products.filter((item) => {
+      //Get Product in Product List
+      let product = products.filter((item) => {
         return item.id === id;
       });
+      let carts = JSON.parse(localStorage.getItem("carts"));
+      if (carts !== null) {
+        const { id } = product[0];
+        let isSame = false;
+        carts.forEach((item) => {
+          if (item.id === id) {
+            isSame = true;
+            item.amount += 1;
+          }
+        });
+        localStorage.setItem("carts", JSON.stringify(carts));
+        if (!isSame) {
+          product = product.map((item) => {
+            return { ...item, amount: 1 };
+          });
+          carts = [...carts, ...product];
+          localStorage.setItem("carts", JSON.stringify(carts));
+        }
+      } else {
+        product = product.map((item) => {
+          return { ...item, amount: 1 };
+        });
+        localStorage.setItem("carts", JSON.stringify(product));
+      }
       dispatch(addCart(product));
       dispatch(amount());
     } else {
@@ -43,6 +82,7 @@ const Product = ({ id, name, price, img, category }) => {
       // history.push("/login");
     }
   };
+
   return (
     <div className="col-men col-md-3 col-sm-6">
       <div className="card_men">

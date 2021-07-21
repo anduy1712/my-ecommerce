@@ -29,6 +29,7 @@ const Header = () => {
   useEffect(() => {
     dispatch(amount());
   }, [cart, dispatch]);
+
   useEffect(() => {
     const userr = localStorage.getItem("user");
     if (userr !== null) {

@@ -16,11 +16,12 @@ const Login = () => {
   const dispatch = useDispatch();
   const auth = useSelector(authSelector);
   //initialValue
-  const [initSignup, setInitSignUp] = useState({
+  const initSignUp = {
     firstName: "",
     email: "",
     password: "",
-  });
+  }
+  const initSignIn = { email: "", password: "" }
   //Validate Sign up
   const validate = Yup.object({
     firstName: Yup.string()
@@ -39,13 +40,9 @@ const Login = () => {
       .required("Password is required"),
   });
   //Function
-  const handleSubmitSignUp = (values) => {
+  const handleSubmitSignUp = (values, actions) => {
     dispatch(addUser(values));
-    setInitSignUp({
-      firstName: "",
-      email: "",
-      password: "",
-    });
+    actions.resetForm();
     toast.success("Account is created", {
       position: "top-right",
       autoClose: 2000,
@@ -83,7 +80,7 @@ const Login = () => {
             <span>I am a returning customer</span>
           </div>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={initSignIn}
             onSubmit={handleSubmitSignIn}
             validationSchema={validateSignIn}
           >
@@ -147,7 +144,7 @@ const Login = () => {
             </span>
           </div>
           <Formik
-            initialValues={initSignup}
+            initialValues={initSignUp}
             validationSchema={validate}
             onSubmit={handleSubmitSignUp}
           >
